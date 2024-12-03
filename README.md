@@ -2,6 +2,23 @@
 
 `uhmonitoring` is a lightweight monitoring agent that integrates with [Uptime Kuma](https://github.com/louislam/uptime-kuma). It collects server metrics like CPU, RAM, Disk, Load Average, and Network Bandwidth, pushes them to Uptime Kuma, and provides a visualization dashboard for detailed metrics.
 
+---
+
+## Proactive Server Monitoring for Superior Management
+
+At **UnderHost**, we utilize advanced monitoring tools, including this server monitoring system, as part of our **Server Management Plans**. These tools, combined with agent-based monitoring, enable us to deliver **proactive server management** to ensure optimal performance, security, and reliability.
+
+Our monitoring solutions allow us to:
+- **Detect and resolve issues** before they impact your operations.
+- **Provide real-time performance insights**.
+- **Enhance uptime and overall server stability**.
+
+**Explore our [Server Management Plans](https://customerpanel.ca/client/store/server-management)** for comprehensive, 24×7 server management tailored to your needs.
+
+Learn more at: [https://monitor.underhost.com/](https://monitor.underhost.com/)
+
+---
+
 ## Features
 - Automatic integration with Uptime Kuma:
   - Dynamically creates a **Push Monitor**.
@@ -25,8 +42,7 @@
 - An **API Key** from Uptime Kuma for monitor creation.
 
 ### One-Click Installer
-To install and start monitoring, click "start" monitoring on your @CustomerPanel managed server page.
-
+To install and start monitoring, click "Start Monitoring" on your **@CustomerPanel** managed server page.
 
 ---
 
@@ -38,7 +54,10 @@ To install and start monitoring, click "start" monitoring on your @CustomerPanel
    - A new **Push Monitor** is automatically created in Uptime Kuma using the provided API Key.
    - The visualization dashboard link is embedded into the monitor description in Markdown format.
 3. **Visualization Dashboard**:
-   - Hosted locally on the monitored server at `https://monitor.underhost.com/status/<SERVER_IP>`.
+   - Hosted locally on the monitored server at:
+     ```
+     https://monitor.underhost.com/status/<SERVER_IP>
+     ```
    - Displays interactive charts for all metrics (updated in real-time).
    - Generates static thumbnails for embedding in Uptime Kuma.
 
@@ -58,10 +77,10 @@ To install and start monitoring, click "start" monitoring on your @CustomerPanel
 ## Uptime Kuma Integration
 1. **Push Monitor**:
    - Automatically created in Uptime Kuma.
-   - Updates with `up` or `down` status based on server health (set to open a ticket or send reboot command on `down` or do nothing)
+   - Updates with `up` or `down` status based on server health (set to open a ticket, send a reboot command, or take no action on `down`).
 2. **Markdown Description**:
    - Includes a link to the real-time dashboard and a static thumbnail preview:
-     ```
+     ```markdown
      ### Server Metrics
      ![Metrics Thumbnail](https://monitor.underhost.com/status/<SERVER_IP>/thumbnail.png)
      [View Full Dashboard](https://monitor.underhost.com/status/<SERVER_IP>)
@@ -70,7 +89,7 @@ To install and start monitoring, click "start" monitoring on your @CustomerPanel
 ---
 
 ## Visualization Dashboard
-- Hosted on the server, accessible using your @CustomerPanel user/pass login at:
+- Hosted on the server, accessible using your **@CustomerPanel** user/pass login at:
   ```
   https://monitor.underhost.com/status/<SERVER_IP>
   ```
@@ -91,7 +110,7 @@ To install and start monitoring, click "start" monitoring on your @CustomerPanel
 ## FAQ
 
 ### How do I get the Uptime Kuma API Key?
-1. Log in to our @CustomerPanel and select your Server.
+1. Log in to your **@CustomerPanel** and select your server.
 2. Navigate to **Settings → API Keys**.
 3. Generate a new API Key and use it during the installation.
 
@@ -113,4 +132,4 @@ For any issues, please contact **UnderHost Support** or open a ticket via [Custo
 ---
 
 ## License
-This project is licensed under the **MIT License**. Feel free to use, modify, and distribute.
+This project is licensed under the **GNU General Public License v3.0 (GPL-3.0)**. You can redistribute and/or modify this software under the terms of the license. For more details, see the [LICENSE](https://www.gnu.org/licenses/gpl-3.0.html).
