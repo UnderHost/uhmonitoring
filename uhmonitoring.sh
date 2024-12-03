@@ -6,7 +6,6 @@ AGENT_SCRIPT="uhmonitoring.py"
 VISUALIZATION_SERVER="server.py"
 DATA_FILE="metrics.json"
 VISUALIZATION_HTML="visualization.html"
-PUSH_KEY="UH_API_KEY"
 KUMA_API_URL="https://monitor.underhost.com"
 KUMA_API_KEY="YOUR_UPTIME_KUMA_API_KEY"  # Replace with your API key
 SERVICE_NAME="uhmonitoring"
@@ -27,14 +26,34 @@ fi
 # Update and install dependencies
 echo "Updating system and installing dependencies..."
 if [ "$PKG_MANAGER" = "apt" ]; then
-    apt update -y && apt install -y python3 python3-pip wget curl
+    apt update -y && apt install -y python3 python3-pip wget curl jq
 elif [ "$PKG_MANAGER" = "yum" ]; then
-    yum update -y && yum install -y python3 python3-pip wget curl
+    yum update -y && yum install -y python3 python3-pip wget curl jq
 fi
 
 # Create agent directory
 echo "Setting up agent directory..."
 mkdir -p $AGENT_DIR
+
+# Create a Push Monitor in Uptime Kuma
+echo "Creating a Push Monitor in Uptime Kuma..."
+MONITOR_DATA=$(curl -s -X POST "$KUMA_API_URL/api/monitor" \
+    -H "Authorization: Bearer $KUMA_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "name": "'"$SERVER_NAME"' ("'"$SERVER_IP"'")",
+        "type": "push",
+        "pushInterval": 60
+    }')
+
+PUSH_KEY=$(echo $MONITOR_DATA | jq -r '.url' | awk -F'push/' '{print $2}')
+
+if [ -z "$PUSH_KEY" ]; then
+    echo "Failed to create Push Monitor or retrieve Push Key. Exiting."
+    exit 1
+fi
+
+echo "Push Monitor created successfully. Push Key: $PUSH_KEY"
 
 # Write the monitoring script
 echo "Creating monitoring script..."
@@ -217,27 +236,7 @@ cat << 'EOF' > $AGENT_DIR/$VISUALIZATION_HTML
 </html>
 EOF
 
-# Create a new monitor in Uptime Kuma
-echo "Creating a new monitor in Uptime Kuma..."
-MONITOR_ID=$(curl -s -X POST "$KUMA_API_URL/api/monitor" \
-    -H "Authorization: Bearer $KUMA_API_KEY" \
-    -H "Content-Type: application/json" \
-    -d '{
-        "name": "'"$SERVER_NAME"' ("'"$SERVER_IP"'")",
-        "type": "push",
-        "pushInterval": 60,
-        "url": "'"$PUSH_KEY"'",
-        "description": "### Server Metrics\n\n[View Metrics Dashboard]('"$VISUALIZATION_URL"')"
-    }' | jq -r '.id')
-
-if [ -z "$MONITOR_ID" ]; then
-    echo "Failed to create monitor. Exiting."
-    exit 1
-fi
-
-echo "Monitor created with ID: $MONITOR_ID"
-
-# Create systemd service
+# Create systemd service for monitoring
 echo "Creating systemd service for monitoring..."
 cat << EOF > /etc/systemd/system/$SERVICE_NAME.service
 [Unit]
