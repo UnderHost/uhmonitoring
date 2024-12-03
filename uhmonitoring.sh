@@ -68,7 +68,7 @@ pip3 install psutil requests
 echo "Creating systemd service..."
 cat << EOF > /etc/systemd/system/$SERVICE_NAME.service
 [Unit]
-Description=Uptime Kuma Monitoring Agent
+Description=UnderHost Monitoring Agent
 After=network.target
 
 [Service]
