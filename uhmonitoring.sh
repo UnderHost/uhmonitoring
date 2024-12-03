@@ -3,7 +3,7 @@
 # Constants
 AGENT_DIR="/opt/uhmonitoring"
 AGENT_SCRIPT="uhmonitoring.py"
-PUSH_KEY="uk1_5ShIjaHYHV_9bU-z5i3E4mFPz0rvmgHhvAgE7gEq"
+PUSH_KEY="UH_API_KEY"
 KUMA_API_URL="https://monitor.underhost.com"
 KUMA_API_KEY="YOUR_UPTIME_KUMA_API_KEY"  # Replace with your API key
 SERVER_NAME=$(hostname)
