@@ -1,6 +1,6 @@
 # UnderHost Monitoring Agent (`uhmonitoring`)
 
-`uhmonitoring` is a lightweight monitoring agent that integrates with [Uptime Kuma](https://github.com/louislam/uptime-kuma). It collects server metrics like CPU, RAM, Disk, Load Average, and Network Bandwidth, pushes them to Uptime Kuma, and provides a visualization dashboard for detailed metrics.
+`uhmonitoring` is a lightweight monitoring agent that integrates with [Uptime Kuma](https://github.com/louislam/uptime-kuma). It collects server metrics like CPU, RAM, Disk, Load Average, and Network Bandwidth, pushes them to Uptime Kuma, and provides a visualization dashboard for detailed metrics.  Part of the [UnderHost Dedicated Server Toolkit](https://underhost.com/servers.php).
 
 ---
 
@@ -32,6 +32,20 @@ Learn more at: [https://monitor.underhost.com/](https://monitor.underhost.com/)
 - Visualization dashboard:
   - Interactive, real-time charts hosted on the server.
   - Static metric thumbnail embedded into Uptime Kuma's monitor description.
+
+## ✨ Features
+
+- **Real-time Monitoring**  
+  Tracks CPU, memory, disk, and network usage
+- **Uptime Kuma Integration**  
+  Automatic push monitor creation with status alerts
+- **Beautiful Visualization**  
+  Interactive charts for historical data analysis
+- **Lightweight**  
+  Minimal resource footprint (<1% CPU usage)
+- **Self-contained**  
+  No external dependencies beyond Python
+
 
 ---
 
@@ -104,6 +118,7 @@ To install and start monitoring, click "Start Monitoring" on your **@CustomerPan
 ## Requirements
 - **Python 3.x**
 - **Uptime Kuma API Key**
+- **UnderHost Server with API Key**
 
 ---
 
@@ -111,7 +126,7 @@ To install and start monitoring, click "Start Monitoring" on your **@CustomerPan
 
 ### How do I get the Uptime Kuma API Key?
 1. Log in to your **@CustomerPanel** and select your server.
-2. Navigate to **Settings → API Keys**.
+2. Navigate to **Management → Dashboard → API Keys**.
 3. Generate a new API Key and use it during the installation.
 
 ### Can I reuse the same Push Monitor for multiple servers?
@@ -123,6 +138,8 @@ Visit:
 https://monitor.underhost.com/status/<SERVER_IP>
 ```
 Replace `<SERVER_IP>` with the server's actual IP address.
+
+Or access your Dashboard in @CustomerPanel
 
 ---
 
