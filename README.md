@@ -15,7 +15,7 @@ Our monitoring solutions allow us to:
 
 **Explore our [Server Management Plans](https://customerpanel.ca/client/store/server-management)** for comprehensive, 24×7 server management tailored to your needs.
 
-Learn more at: [https://monitor.underhost.com/](https://monitor.underhost.com/)
+Learn more at: [https://underhost.com/server-management.php]([https://monitor.underhost.com/](https://underhost.com/server-management.php))
 
 ---
 
