@@ -19,7 +19,7 @@ Learn more at: [https://underhost.com/server-management.php]([https://monitor.un
 
 ---
 
-## Features
+## ✨ Features
 - Automatic integration with Uptime Kuma:
   - Dynamically creates a **Push Monitor**.
   - Adds a **Status Page** with server-specific visualization links.
@@ -32,8 +32,6 @@ Learn more at: [https://underhost.com/server-management.php]([https://monitor.un
 - Visualization dashboard:
   - Interactive, real-time charts hosted on the server.
   - Static metric thumbnail embedded into Uptime Kuma's monitor description.
-
-## ✨ Features
 
 - **Real-time Monitoring**  
   Tracks CPU, memory, disk, and network usage
