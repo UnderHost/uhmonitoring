@@ -1,150 +1,129 @@
-# UnderHost Monitoring Agent (`uhmonitoring`)
+# 🚀 UnderHost Monitoring Agent (`uhmonitoring`)
 
-`uhmonitoring` is a lightweight monitoring agent that integrates with [Uptime Kuma](https://github.com/louislam/uptime-kuma). It collects server metrics like CPU, RAM, Disk, Load Average, and Network Bandwidth, pushes them to Uptime Kuma, and provides a visualization dashboard for detailed metrics.  Part of the [UnderHost Dedicated Server Toolkit](https://underhost.com/servers.php).
+![UnderHost Monitoring Dashboard](https://via.placeholder.com/800x400?text=UnderHost+Monitoring+Dashboard)
 
----
+## Enterprise-Grade Server Monitoring Solution
 
-## Proactive Server Monitoring for Superior Management
-
-At **UnderHost**, we utilize advanced monitoring tools, including this server monitoring system, as part of our **Server Management Plans**. These tools, combined with agent-based monitoring, enable us to deliver **proactive server management** to ensure optimal performance, security, and reliability.
-
-Our monitoring solutions allow us to:
-- **Detect and resolve issues** before they impact your operations.
-- **Provide real-time performance insights**.
-- **Enhance uptime and overall server stability**.
-
-**Explore our [Server Management Plans](https://customerpanel.ca/client/store/server-management)** for comprehensive, 24×7 server management tailored to your needs.
-
-Learn more at: [https://underhost.com/server-management.php]([https://monitor.underhost.com/](https://underhost.com/server-management.php))
+`uhmonitoring` is a lightweight Python agent that integrates with [Uptime Kuma](https://github.com/louislam/uptime-kuma) to provide comprehensive server monitoring. Part of the [UnderHost Dedicated Server Toolkit](https://underhost.com/servers.php).
 
 ---
 
-## ✨ Features
-- Automatic integration with Uptime Kuma:
-  - Dynamically creates a **Push Monitor**.
-  - Adds a **Status Page** with server-specific visualization links.
-- Collects server metrics:
-  - **CPU Usage**
-  - **RAM Usage**
-  - **Disk Usage**
-  - **Load Average**
-  - **Network Bandwidth (Sent/Received)**
-- Visualization dashboard:
-  - Interactive, real-time charts hosted on the server.
-  - Static metric thumbnail embedded into Uptime Kuma's monitor description.
+## 🌟 Key Features
 
-- **Real-time Monitoring**  
-  Tracks CPU, memory, disk, and network usage
-- **Uptime Kuma Integration**  
-  Automatic push monitor creation with status alerts
-- **Beautiful Visualization**  
-  Interactive charts for historical data analysis
-- **Lightweight**  
-  Minimal resource footprint (<1% CPU usage)
-- **Self-contained**  
-  No external dependencies beyond Python
+### Real-Time Monitoring
+- CPU, RAM, and Disk utilization
+- Network bandwidth (in/out)
+- System load averages
 
+### Seamless Integration
+- Automatic Uptime Kuma push monitor creation
+- Embedded visualization in status pages
+- Custom alert thresholds
+
+### Beautiful Visualization
+- Interactive dashboard with historical data
+- Static thumbnails for Uptime Kuma
+- Mobile-responsive design
 
 ---
 
-## Installation
+## ⚡ Quick Installation
 
 ### Prerequisites
-- A running instance of Uptime Kuma.
-- An **API Key** from Uptime Kuma for monitor creation.
+- Uptime Kuma instance ([self-hosted](https://github.com/louislam/uptime-kuma) or [UnderHost Managed](https://monitor.underhost.com))
+- API Key with monitor creation permissions
 
-### One-Click Installer
-To install and start monitoring, click "Start Monitoring" on your **@CustomerPanel** managed server page.
+### Installation Options
 
----
-
-## How It Works
-1. **Agent Installation**:
-   - The script installs all necessary dependencies (`python3`, `psutil`, `flask`, etc.).
-   - Sets up a monitoring agent that collects metrics every minute.
-2. **Uptime Kuma Integration**:
-   - A new **Push Monitor** is automatically created in Uptime Kuma using the provided API Key.
-   - The visualization dashboard link is embedded into the monitor description in Markdown format.
-3. **Visualization Dashboard**:
-   - Hosted locally on the monitored server at:
-     ```
-     https://monitor.underhost.com/status/<SERVER_IP>
-     ```
-   - Displays interactive charts for all metrics (updated in real-time).
-   - Generates static thumbnails for embedding in Uptime Kuma.
-
----
-
-## Metrics Collected
-- **CPU Usage**: Real-time CPU utilization percentage.
-- **Memory Usage**: Percentage of RAM in use.
-- **Disk Usage**: Percentage of disk space in use.
-- **Load Average**: System load averages (1m, 5m, 15m).
-- **Network Bandwidth**:
-  - Total data sent (MB).
-  - Total data received (MB).
-
----
-
-## Uptime Kuma Integration
-1. **Push Monitor**:
-   - Automatically created in Uptime Kuma.
-   - Updates with `up` or `down` status based on server health (set to open a ticket, send a reboot command, or take no action on `down`).
-2. **Markdown Description**:
-   - Includes a link to the real-time dashboard and a static thumbnail preview:
-     ```markdown
-     ### Server Metrics
-     ![Metrics Thumbnail](https://monitor.underhost.com/status/<SERVER_IP>/thumbnail.png)
-     [View Full Dashboard](https://monitor.underhost.com/status/<SERVER_IP>)
-     ```
-
----
-
-## Visualization Dashboard
-- Hosted on the server, accessible using your **@CustomerPanel** user/pass login at:
-  ```
-  https://monitor.underhost.com/status/<SERVER_IP>
-  ```
-- Provides interactive, real-time charts for:
-  - CPU Usage
-  - Memory Usage
-  - Disk Usage
-  - Network Bandwidth (IN/OUT)
-
----
-
-## Requirements
-- **Python 3.x**
-- **Uptime Kuma API Key**
-- **UnderHost Server with API Key**
-
----
-
-## FAQ
-
-### How do I get the Uptime Kuma API Key?
-1. Log in to your **@CustomerPanel** and select your server.
-2. Navigate to **Management → Dashboard → API Keys**.
-3. Generate a new API Key and use it during the installation.
-
-### Can I reuse the same Push Monitor for multiple servers?
-No, each server creates its own unique Push Monitor to ensure metrics are isolated and easily traceable.
-
-### How do I access the visualization dashboard?
-Visit:
+**For UnderHost Customers:**
 ```
-https://monitor.underhost.com/status/<SERVER_IP>
+wget -qO- https://monitor.underhost.com/install | bash
 ```
-Replace `<SERVER_IP>` with the server's actual IP address.
 
-Or access your Dashboard in @CustomerPanel
+**Manual Installation:**
+```
+wget https://github.com/UnderHost/uhmonitoring/releases/latest/download/install.sh
+chmod +x install.sh
+sudo ./install.sh --api-key YOUR_API_KEY
+```
 
 ---
 
-## Support
-For any issues, please contact **UnderHost Support** or open a ticket via [CustomerPanel](https://customerpanel.ca/client/clientarea.php).
+## 📊 Metrics Collected
+
+| Metric            | Description                     | Alert Threshold |
+|-------------------|---------------------------------|-----------------|
+| CPU Usage         | Total CPU utilization           | >90% for 5m     |
+| Memory Usage      | RAM consumption                 | >85%            |
+| Disk Usage        | Root partition space            | >90%            |
+| Network Bandwidth | Data sent/received (MB)         | Customizable    |
+| Load Average      | System load (1m, 5m, 15m)       | >CPU cores × 2  |
 
 ---
 
-## License
-This project is licensed under the **GNU General Public License v3.0 (GPL-3.0)**. You can redistribute and/or modify this software under the terms of the license. For more details, see the [LICENSE](https://www.gnu.org/licenses/gpl-3.0.html).
+## 🔗 Uptime Kuma Integration
+
+1. **Auto-Created Push Monitor**
+
+2. **Smart Alerting**
+   - Configurable thresholds
+   - Multiple notification methods
+   - Auto-remediation options
+
+---
+
+## 🖥️ Dashboard Access
+
+**Web Interface:**
+```
+https://monitor.underhost.com/status/YOUR_SERVER_IP
+```
+
+**CustomerPanel Integration:**
+Available under *Server → Monitoring* in your [CustomerPanel](https://customerpanel.ca)
+
+---
+
+## ❓ Frequently Asked Questions
+
+### How do I get an API Key?
+1. Log in to [CustomerPanel](https://customerpanel.ca)
+2. Navigate to *Settings → API Keys*
+3. Generate key with "Monitor" permissions
+
+### Can I monitor multiple servers?
+Yes! Each server maintains:
+- Isolated push monitor
+- Dedicated dashboard
+- Independent alert rules
+
+### How often are metrics collected?
+- Default: 60-second intervals
+- Configurable in `/opt/uhmonitoring/config.yaml`
+
+---
+
+## 🛡️ Security Features
+
+- **Encrypted communications** (TLS 1.2+)
+- **Least privilege access**
+- **Systemd sandboxing**
+- **Regular security updates**
+
+---
+
+## 📞 Support
+
+**Managed Clients:**
+- 24/7 Ticket Support via [CustomerPanel](https://customerpanel.ca/)
+
+**Community Users:**
+- [GitHub Issues](https://github.com/UnderHost/uhmonitoring/issues)
+- Documentation: [docs.underhost.com](https://docs.underhost.com)
+
+---
+
+## 📜 License
+
+GNU GPLv3 © 2023-2025 UnderHost.com  
+*Free for personal and commercial use*
